@@ -1,3 +1,51 @@
 body {
     padding: 0px;
+    margin: 0px;
+}
+h1 {
+    margin:0px;
+    text-align: center;
+    padding: 0px;
+    color: red;
+}
+header {
+    background-color: navy;
+    height: 8vh;
+}
+
+.content {
+    background-color: gray;
+    height: 91vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.moviesList {
+    width: 33%;
+    height: 97%;
+    background-color: rgb(30, 221, 221);
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.movieDetails {
+    width: 65%;
+    height: 97%;
+    background-color: rgb(170, 21, 21);
+    border-radius: 10px;
+}
+h2 {
+    text-align: center;
+    margin: 0px;
+    color: black;
+
+}
+.detailsDiv {
+    padding-top: 25px;
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+    
+
 }
