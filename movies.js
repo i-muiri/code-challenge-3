@@ -1,23 +1,28 @@
 const list = document.getElementsByTagName("ul")[0];
 const titleLabel = document.getElementById("title");
-const runTimeLabel = document.getElementById("runtime");
-const showTimeLabel = document.getElementById("showtime");
+const runTimeLabel = document.getElementById("runTime");
+const showTimeLabel = document.getElementById("showTime");
 const descLabel = document.getElementsByTagName("p")[0];
 const poster = document.getElementsByTagName("img")[0];
 const ticketsLabel = document.getElementById("tickets");
-const buyButton = document.getElementById("buy");
+const purchaseButton = document.getElementById("buy");
 
-let selectedMovie = {};
+let movies = [];
+let selectedMovieId = 1;
 
 window.addEventListener("load", () => {
   fetchData();
 });
 
-buyButton.addEventListener("click", () => {
+purchaseButton.addEventListener("click", () => {
+  const selectedMovie = movies.find((movie) => movie.id == selectedMovieId);
   fetch(`http://localhost:3000/films/${selectedMovie.id}`, {
     method: "PUT",
     headers: new Headers({ "content-type": "application/json" }),
-    body: `tickets_sold=${encodeURIComponent(selectedMovie.tickets_sold +1)}`,
+    body: JSON.stringify({
+      ...selectedMovie,
+      tickets_sold: selectedMovie.tickets_sold + 1,
+    }),
   })
     .then((response) => {
       if (response.ok) {
@@ -27,20 +32,21 @@ buyButton.addEventListener("click", () => {
       }
     })
     .then((data) => {
-      console.log(data);
-      selectedMovie = data;
-      setMovieDetails();
       fetchData();
+      setMovieDetails();
     })
-    
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 function fetchData() {
   fetch("http://localhost:3000/films", { method: "GET" })
     .then((response) => response.json())
     .then((data) => {
+      movies = data;
       data.forEach((movie, id) => {
-        const listItem = document.createElement("ul");
+        const listItem = document.createElement("li");
 
         const isSoldOut = movie.capacity - movie.tickets_sold == 0;
         //Ternary operator
@@ -65,18 +71,20 @@ function fetchData() {
         listItem.append(deleteButton);
 
         listItem.addEventListener("click", () => {
-          selectedMovie = movie;
+          selectedMovieId = movie.id;
           setMovieDetails();
         });
 
         list.append(listItem);
       });
-    
+
+      setMovieDetails();
     });
 }
 
 function setMovieDetails() {
-  const movie = selectedMovie;
+  const movie = movies.find((m) => m.id == selectedMovieId);
+
   titleLabel.textContent = movie.title;
   runTimeLabel.textContent = movie.runtime;
   showTimeLabel.textContent = movie.showtime;
@@ -85,13 +93,14 @@ function setMovieDetails() {
   ticketsLabel.textContent = movie.capacity - movie.tickets_sold;
 
   if (movie.capacity - movie.tickets_sold == 0) {
-    buyButton.setAttribute("class", "buy-disabled");
-    buyButton.textContent = "Sold Out";
-    buyButton.setAttribute("disabled", true);
-  } else {
-    buyButton.setAttribute("class", "buy");
-    buyButton.textContent = "Buy Ticket";
-    buyButton.setAttribute("disabled", false);
+    purchaseButton.setAttribute("class", "buy-disabled");
+    purchaseButton.textContent = "Sold Out";
+    purchaseButton.setAttribute("disabled", true);
+  } 
+else {
+    purchaseButton.setAttribute("class", "buy");
+    buyButton.textContent = "buy Ticket";
+    purchaseButton.setAttribute("disabled", false);
   }
 }
 
@@ -115,5 +124,4 @@ function setMovieDetails() {
     .catch((err) => {
       console.log(err);
     });
-}
-*/
+}*/
