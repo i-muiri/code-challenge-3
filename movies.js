@@ -54,7 +54,7 @@ function fetchData() {
         listItem.setAttribute("class", className);
 
         const numLabel = document.createElement("label");
-        numLabel.textContent = id + 1;
+        numLabel.textContent = id ++ ;
 
         const nameLabel = document.createElement("label");
         nameLabel.textContent = movie.title;
@@ -93,7 +93,7 @@ function setMovieDetails() {
   ticketsLabel.textContent = movie.capacity - movie.tickets_sold;
 
   if (movie.capacity - movie.tickets_sold == 0) {
-    purchaseButton.setAttribute("class", "buy-disabled");
+    purchaseButton.setAttribute("class", "purchase-disabled");
     purchaseButton.textContent = "Sold Out";
     purchaseButton.setAttribute("disabled", true);
   } 

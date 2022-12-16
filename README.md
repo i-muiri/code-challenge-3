@@ -2,7 +2,10 @@
 # DESCRIPTION
 
 FlatDango is a mini web application for purchasing movie tickets.
+
+The site is available at https://i-muiri.github.io/code-challenge-3/
 # INSTALLATION
+
 
 To install the repository on your machine follow the instructions below;
 
@@ -12,16 +15,16 @@ Clone this repo to your machine
 
 Change directory to the code challenge folder. cd code-challenge-3
 
-Open it in a text editor of your choice.
+Open it in a code editor of your choice.
 # RUNNING THE APPLICATION
 
 To run the app on your machine;
+Click on the link below
+    https://i-muiri.github.io/code-challenge-3/
 
 Open the terminal and run the command while in the cloned directory;
 
 json-server --watch db.json
-
-Open the html file in the browser of you choice.
 
 A list of all the movies is displayed on the left side.
 
