@@ -41,7 +41,7 @@ purchaseButton.addEventListener("click", () => {
 });
 
 function fetchData() {
-  fetch("https://my-json-server.typicode.com/i-muiri/moviesapi/", { method: "GET" })
+  fetch("https://my-json-server.typicode.com/i-muiri/moviesapi/db/", { method: "GET" })
     .then((response) => response.json())
     .then((data) => {
       movies = data;
